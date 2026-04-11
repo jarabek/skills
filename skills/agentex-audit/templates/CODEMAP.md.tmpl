@@ -1,0 +1,63 @@
+# CODEMAP
+
+<!--
+Target length: ~50 lines. This file is the single highest-leverage
+AgentEx artifact in the repo — it answers "where does X live?" in one
+read, cutting 2-5k tokens of exploration per agent session.
+
+Keep it short. If it grows past 80 lines, split the endpoint index
+into a separate `docs/endpoints.md`.
+-->
+
+## What this repo is
+
+<1-sentence pitch: "A <type> that <does X> for <users> using <stack>.">
+
+## Directory tree
+
+```
+<repo-root>/
+├── <dir>/          # <one-line purpose>
+├── <dir>/          # <one-line purpose>
+├── <dir>/
+│   ├── <subdir>/   # <one-line purpose>
+│   └── <subdir>/   # <one-line purpose>
+├── tests/          # <test location and runner>
+├── docs/           # <docs convention>
+├── scripts/        # <where helper scripts live>
+└── <entry-point>   # <main.py | index.ts | cmd/app/main.go>
+```
+
+## Where to add X
+
+| I want to add... | Put it in... |
+|---|---|
+| A new API route | `<path/to/routers/<domain>.py>` |
+| A new data model | `<path/to/models/<domain>.py>` |
+| A new service / business logic module | `<path/to/services/<domain>.py>` |
+| A new UI page / component | `<path/to/ui/pages/ or components/>` |
+| A new unit test | `<tests/test_<domain>.py>` |
+| A new integration / e2e test | `<tests/test_<domain>_e2e.py>` |
+| A new background job | `<path/to/jobs/<domain>.py>` |
+| A new configuration setting | `<path/to/config.py> + .env.example` |
+
+## Endpoints
+
+<!-- One line per endpoint. Points at the handler file. Keep alphabetized. -->
+
+| Method | Path | Handler |
+|---|---|---|
+| GET | `/<resource>` | `<file>:<function>` |
+| POST | `/<resource>` | `<file>:<function>` |
+| GET | `/<resource>/{id}` | `<file>:<function>` |
+
+## Entry points
+
+- **App:** `<entry-point-file>`
+- **CLI:** `<cli-entry-file>` (if applicable)
+- **Background worker:** `<worker-entry-file>` (if applicable)
+
+## See also
+
+- [`AGENTS.md`](./AGENTS.md) — commands, conventions, boundaries
+- [`README.md`](./README.md) — install and usage
