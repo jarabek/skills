@@ -48,7 +48,7 @@ Using the detection output, determine:
 - **Application type**: library, service, CLI, webapp, data pipeline, infra.
 - **Agent-adoption stage**: none → `.claude/` exists → full `.claude/{hooks,skills,agents,commands}` tree.
 
-These four axes change **which signals are in scope and how to weight them**. A pre-product-market-fit prototype should not be audited for Alembic migrations or CI maturity; a mature service absolutely should.
+These four axes change **which signals are in scope and how to weight them**. A pre-product-market-fit prototype should not be audited for a high maturity workflow; a mature service absolutely should.
 
 ### Step 3 — Walk the signal catalog
 

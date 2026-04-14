@@ -22,7 +22,7 @@ Severity levels:
 **Citation:** GitHub Blog, "How to write a great agents.md: lessons from 2,500 repositories" (2025).
 
 ### 1.2 `CLAUDE.md` exists and is concise — `[AgentEx]` — high
-**What to check:** root `CLAUDE.md`; `wc -l` should be < 200. It should NOT duplicate AGENTS.md content.
+**What to check:** root `CLAUDE.md`; `wc -l` should be < 200. It should NOT duplicate AGENTS.md content. It should point to `AGENTS.md`
 **Present means:** Claude Code auto-loads it on session start.
 **Absent means:** Claude starts with no project conventions. If present but > 200 lines: every session pays a tax on context.
 **Fix template:** `templates/CLAUDE.md.tmpl`
@@ -69,12 +69,7 @@ Severity levels:
 **Present means:** agents pick correct idioms and APIs on the first try.
 **Absent means:** agents guess, sometimes wrongly.
 
-### 1.11 Domain glossary — `[AgentEx]` — low
-**What to check:** `docs/glossary.md` or a glossary section in AGENTS.md.
-**Present means:** agents use consistent domain terminology.
-**Absent means:** agents invent synonyms, causing drift.
-
-### 1.12 "Where to add X" table — `[AgentEx]` — medium
+### 1.11 "Where to add X" table — `[AgentEx]` — medium
 **What to check:** AGENTS.md or CODEMAP.md contains an explicit table mapping task → file path.
 **Present means:** cognitive load ≈ 0 for common feature work.
 **Absent means:** see 1.3.
@@ -179,7 +174,7 @@ Severity levels:
 **Absent means:** agents scroll README, package.json scripts, Dockerfile, and CI config looking for the right incantation.
 
 ### 3.8 Idempotent startup script — `[AgentEx+DevEx]` — medium
-**What to check:** `startup.sh`, `./scripts/dev.sh`, or `docker-compose up` path. Running twice should not error.
+**What to check:** `startup.sh`, `./scripts/dev.sh`, `docker-compose up` or other documented command. Running twice should not error.
 **Present means:** agents can spin the dev environment up without reading docs.
 **Absent means:** agents ask the human to start the dev server.
 
@@ -284,7 +279,7 @@ Severity levels:
 **Absent means:** silent skips, broken tests on any other machine. (Classic stocked bug: hardcoded `10.0.0.182` in Playwright tests.)
 
 ### 5.9 Test fixtures isolated from dev DB — `[AgentEx+DevEx]` — high
-**What to check:** integration/e2e tests use an isolated DB (in-memory SQLite or per-test schema), not the shared dev Postgres.
+**What to check:** integration/e2e tests use an isolated DB (in-memory SQLite or per-test schema), not the shared dev database.
 **Present means:** tests are repeatable.
 **Absent means:** accumulating test state, strict-mode selector violations, flakes.
 
@@ -293,7 +288,7 @@ Severity levels:
 **Present means:** agents know where to add a new setting.
 
 ### 5.11 No duplicate onboarding docs — `[AgentEx]` — medium
-**What to check:** AGENTS.md and CLAUDE.md should not duplicate content. README should not restate AGENTS.md.
+**What to check:** AGENTS.md and CLAUDE.md should not duplicate content. README should not restate AGENTS.md. CLAUDE.md should only contain Claude specific details, and otherwise point to AGENTS.md
 **Present means:** one source of truth.
 **Absent means:** stale drift, contradictory instructions, wasted context.
 
