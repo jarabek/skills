@@ -1,0 +1,72 @@
+# .pre-commit-config.yaml
+#
+# Minimal pre-commit config. Install with:
+#   pre-commit install
+# (or `uv run pre-commit install`, `npx pre-commit install`, etc.)
+#
+# This config shifts feedback left: secret scanning, formatting, linting,
+# and basic file hygiene all run before the commit reaches the repo.
+# Customize for your stack — remove hooks you don't need, add language-
+# specific ones (rustfmt, gofmt, etc.).
+
+repos:
+  # Basic file hygiene
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+        args: ["--maxkb=500"]
+      - id: check-merge-conflict
+      - id: mixed-line-ending
+
+  # Secret scanning — prevents credentials from ever entering history
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.4
+    hooks:
+      - id: gitleaks
+
+  # --- Python (uncomment if applicable) ---
+  # - repo: https://github.com/astral-sh/ruff-pre-commit
+  #   rev: v0.6.0
+  #   hooks:
+  #     - id: ruff
+  #       args: ["--fix"]
+  #     - id: ruff-format
+  # - repo: https://github.com/pre-commit/mirrors-mypy
+  #   rev: v1.11.0
+  #   hooks:
+  #     - id: mypy
+  #       additional_dependencies: []
+
+  # --- JavaScript / TypeScript (uncomment if applicable) ---
+  # - repo: https://github.com/pre-commit/mirrors-prettier
+  #   rev: v3.1.0
+  #   hooks:
+  #     - id: prettier
+  # - repo: local
+  #   hooks:
+  #     - id: eslint
+  #       name: eslint
+  #       entry: npx eslint --fix
+  #       language: system
+  #       types: [javascript, jsx, ts, tsx]
+
+  # --- Doc length guardrails ---
+  # These keep AGENTS.md and CLAUDE.md below the 200-line threshold
+  # recommended by the Claude Code docs. Context-window discipline
+  # starts with not letting onboarding docs bloat.
+  - repo: local
+    hooks:
+      - id: claude-md-length
+        name: CLAUDE.md length check (≤200 lines)
+        entry: bash -c 'if [ -f CLAUDE.md ] && [ "$(wc -l < CLAUDE.md)" -gt 200 ]; then echo "CLAUDE.md exceeds 200 lines"; exit 1; fi'
+        language: system
+        pass_filenames: false
+      - id: agents-md-length
+        name: AGENTS.md length check (≤250 lines)
+        entry: bash -c 'if [ -f AGENTS.md ] && [ "$(wc -l < AGENTS.md)" -gt 250 ]; then echo "AGENTS.md exceeds 250 lines"; exit 1; fi'
+        language: system
+        pass_filenames: false
