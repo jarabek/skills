@@ -5,7 +5,7 @@ A home for agent skills that I've found a personal need for, for which I haven't
 
 ## Skills in this repo
 
-- **agentex-audit** — Audits any repo for AgentEx (AI-agent ergonomics) and DevEx best practices. Produces a tiered, actionable recommendation report modeled on Forsgren/Humble/Kim DevEx research and emerging AgentEx patterns (AGENTS.md, CLAUDE.md, MCP, guardrails, feedback loops).
+- **agentex-audit** — Audits any repo for AgentEx (AI-agent ergonomics) and DevEx best practices. Produces a tiered, actionable recommendation report modeled on Forsgren/Humble/Kim DevEx research and emerging AgentEx patterns (AGENTS.md, CLAUDE.md, MCP, guardrails, feedback loops). Strongly geared towards full stack web apps, YMMV outside of this domain.
 
 ```
 npx skills@latest add jarabek/skills/agentex-audit
